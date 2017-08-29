@@ -2,6 +2,9 @@ import React from 'react'
 import Header from './Header/Header'
 import {Route ,Switch} from 'react-router-dom'
 import Score from './../components/ScoreBoard/Audience'
+import Audience from './../components/Audience/Audience'
+import Speaker from './../components/Speaker/Audience'
+
 
 var io = require('socket.io-client')
 
@@ -10,28 +13,56 @@ export default class App extends React.Component{
         super(props);
         this.state={
             status:'Disconnected',
-            Title:''
+            Title:'',
+            member:'',
+            Audience:[],
+            Chat:[]
         }
         this.connect=this.connect.bind(this)
         this.disconnect=this.disconnect.bind(this)
         this.updateTitle=this.updateTitle.bind(this)
+        this.emit=this.emit.bind(this)
+        this.join = this.join.bind(this)
+        this.UpdateAudience=this.UpdateAudience.bind(this)
+        this.UpdateChatArray=this.UpdateChatArray.bind(this)
         
     }
     componentWillMount(){
-        this.socket=io('http://localhost:3002');
+        this.socket=io('https://reactlivechat.herokuapp.com');
         this.socket.on('connect',this.connect)
         this.socket.on('disconnect',this.disconnect)
         this.socket.on('TitleOfPresentation',this.updateTitle)
+        this.socket.on('join',this.join)
+        this.socket.on('audience',this.UpdateAudience)
+        this.socket.on('Chat',this.UpdateChatArray)
         
     }
+    UpdateChatArray(data){
+        this.setState({
+            Chat:data
+        })
+    }
+    join(data){
+        // console.log(data)
+        this.setState({
+            member:data.newMember
+        })
+
+        sessionStorage.LogedIn=JSON.stringify(data.newMember)
+    }
+
+    emit(ename,data){
+        this.socket.emit(ename,data)
+    }
     connect(){
-        console.log('COnnected',this.socket.id)
+        // console.log('COnnected',this.socket.id)
+        sessionStorage.LogedIn ? (this.emit('Join',JSON.parse(sessionStorage.LogedIn))):null
                 this.setState({
             status:'connected'
         })
     }
   disconnect(){
-        console.log('DisCOnnected',this.socket.id)
+        // console.log('DisCOnnected',this.socket.id)
                 this.setState({
             status:'Disconected'
         })
@@ -42,13 +73,24 @@ export default class App extends React.Component{
             Title:state.title
         })
     }
+    UpdateAudience(data){
+        // console.log(data)
+        this.setState({
+            Audience:data
+        })
+    }
 
     render(){
         return(
         <div>
-        <Header title={this.state.Title} />
-          
-         <Route path ="/Score" component = {Score} />
+        {/*<Header title={this.state.Title} />*/}
+          <Switch>
+         <Route exact path ="/" render={()=><Audience {...this.state} emit={this.emit}/>}/>
+         <Route exact path ="/Speaker" component = {Speaker} />
+         <Route exact path ="/Score" component = {Audience} />
+         <Route path = "*" render={()=><h1>Route Not Found</h1>}/>
+         
+          </Switch>
          
         </div>
         )
