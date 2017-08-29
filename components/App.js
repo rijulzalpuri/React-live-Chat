@@ -1,5 +1,8 @@
 import React from 'react'
 import Header from './Header/Header'
+import {Route ,Switch} from 'react-router-dom'
+import Score from './../components/ScoreBoard/Audience'
+
 var io = require('socket.io-client')
 
 export default class App extends React.Component{
@@ -44,6 +47,9 @@ export default class App extends React.Component{
         return(
         <div>
         <Header title={this.state.Title} />
+          
+         <Route path ="/Score" component = {Score} />
+         
         </div>
         )
     }
