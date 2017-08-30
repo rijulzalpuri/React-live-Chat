@@ -1,9 +1,8 @@
 import React from 'react'
 import Header from './Header/Header'
 import {Route ,Switch} from 'react-router-dom'
-import Score from './../components/ScoreBoard/Audience'
 import Audience from './../components/Audience/Audience'
-import Speaker from './../components/Speaker/Audience'
+
 
 
 var io = require('socket.io-client')
@@ -82,12 +81,10 @@ export default class App extends React.Component{
 
     render(){
         return(
-        <div>
+        <div style={{padding:'10px'}}>
         {/*<Header title={this.state.Title} />*/}
           <Switch>
          <Route exact path ="/" render={()=><Audience {...this.state} emit={this.emit}/>}/>
-         <Route exact path ="/Speaker" component = {Speaker} />
-         <Route exact path ="/Score" component = {Audience} />
          <Route path = "*" render={()=><h1>Route Not Found</h1>}/>
          
           </Switch>

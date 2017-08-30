@@ -25,10 +25,10 @@ export default class Audience extends React.Component{
                     </ConditionRender>
                     <ConditionRender if={this.props.member.name}>
                         <div>
-                            <h1>Welcome {this.props.member.name}</h1>
-                            <h2>{this.props.Audience.length} Member are Connected</h2>
+                            <h1 style={{color: "chartreuse"}}>Welcome {this.props.member.name}</h1>
+                            <h2 style={{color: "aqua"}}> Member Connected : {this.props.Audience.length}</h2>
                             <div className="MainChatDiv" style={{    height: "400px"}}>
-                                <div className="ViewChat" style={{    height: "90%",backgroundColor:'#e889d2',overflowY: "scroll"}}>
+                                <div className="ViewChat" style={{    height: "90%",backgroundColor:"rgba(255, 249, 254, 0.54)",overflowY: "auto",padding:"10px"}}>
                                 <div style={{    width: "89%"}}>
                                 {
                                     this.props.Chat.map((item,index)=>{
