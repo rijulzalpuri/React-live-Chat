@@ -12,7 +12,7 @@ export default class Audience extends React.Component{
         console.log('here')
         this.props.emit('AddChat',{message:this.refs.chatText.value,name:this.props.member.name})
         this.refs.chatText.value=''
-        this.refs.chatText.blur()
+        // this.refs.chatText.blur()
     }
 
     render(){
@@ -41,8 +41,8 @@ export default class Audience extends React.Component{
                                 
                                 </div>
                                 <div className="SubmitChat">
-                                <input type="text" ref="chatText" placeholder="Enter Chat" style={{    width: "89%"}} />
-                                <input type="button" value="Send" onClick={this.SendChat} style={{    width: "11%"}}/>
+                                <input type="text" ref="chatText" onKeyDown={(e)=>{e.keyCode=='13'?this.SendChat():''}} placeholder="Enter Chat" style={{    width: "89%",border:'none'}} />
+                                <input type="button" value="Send" onClick={this.SendChat} style={{    width: "11%",border:"none"}}/>
                                 </div>
                             </div>
                         </div>
