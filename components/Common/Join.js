@@ -18,7 +18,7 @@ export default class JoinForm extends React.Component{
     componentDidMount(){
         this.generateEffect()
     }
-    componentWillMount(){
+    componentWillUnmount(){
         console.log('sd')        
         str=''
     }
