@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "homepage": "https://rijulzalpuri.github.io/React-live-Chat",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --progress --watch",
+   "predeploy": "npm run build",
+   "deploy": "gh-pages -d build",
     "start": "webpack-dev-server --open",
     "build": "webpack"
   },
@@ -18,6 +21,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "express": "^4.15.4",
+    "gh-pages": "^1.0.0",
     "path": "^0.12.7",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
