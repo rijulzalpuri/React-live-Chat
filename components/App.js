@@ -83,12 +83,12 @@ export default class App extends React.Component{
         return(
         <div style={{padding:'10px'}}>
         {/*<Header title={this.state.Title} />*/}
-          <Switch>
+          {/*<Switch>
          <Route path ="/" render={()=><Audience {...this.state} emit={this.emit}/>}/>
          <Route path = "*" render={()=><h1>Route Not Found</h1>}/>
          
-          </Switch>
-         
+          </Switch>*/}
+         <Audience {...this.state} emit={this.emit}/>
         </div>
         )
     }
