@@ -24,7 +24,7 @@ module.exports ={
         
     },
        devServer: {
-     contentBase: './public',
+     contentBase: './',
     //  host:'0.0.0.0', This is used to host the server on a public ip
       historyApiFallback: true,
     //   hot:true
