@@ -84,7 +84,7 @@ export default class App extends React.Component{
         <div style={{padding:'10px'}}>
         {/*<Header title={this.state.Title} />*/}
           <Switch>
-         <Route exact path ="/" render={()=><Audience {...this.state} emit={this.emit}/>}/>
+         <Route path ="/" render={()=><Audience {...this.state} emit={this.emit}/>}/>
          <Route path = "*" render={()=><h1>Route Not Found</h1>}/>
          
           </Switch>
